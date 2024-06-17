@@ -1,0 +1,398 @@
+@import "./mixins";
+@import url("https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700&display=swap");
+
+:root {
+  --font-size-small: 1.4rem;
+  --font-size-regular: 1.6rem;
+  --font-size-large: 1.8rem;
+  --font-size-xLarge: 4.2rem;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+  --default-padding: 1.6rem;
+  --font-family-ar: "Almarai", sans-serif;
+  --timing-animation: 0.2s;
+  --color-black: #3e3e3e;
+  --color-red: #ff2d2d;
+
+  --color-blue: hsl(220, 98%, 61%);
+  --color-white: white;
+  --color-gray: #525252;
+  --color-light-gray: #f9f9f9;
+  --color-text: var(--color-black);
+  --color-bg: var(--color-light-gray);
+  --color-input: var(--color-white);
+  --color-link: var(--color-blue);
+  --color-task-hover: #ececec;
+  --color-bg-dark-theme: #181824;
+  --color-input-dark-theme: #24273d;
+  --color-text-dark-theme: var(--color-light-gray);
+}
+
+/* CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border-radius: 0;
+}
+
+html {
+  font-size: 62%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.App {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  font-family: "Almarai", sans-serif;
+  font-size: var(--font-size-regular);
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  transition: background var(--timing-animation);
+
+  &--isDark {
+    --color-bg: var(--color-bg-dark-theme);
+    --color-input: var(--color-input-dark-theme);
+    --color-text: var(--color-text-dark-theme);
+    --color-task-hover: var(--color-input-dark-theme);
+    --color-link: hsl(220, 98%, 61%);
+    --color-gray: #adadad;
+  }
+
+  &__upperBackground {
+    width: 100%;
+    height: 25rem;
+    background-image: url("images/bg-desktop-light.jpg");
+    background-size: cover;
+  }
+
+  &__lowerBackground {
+    width: 100%;
+    height: calc(100vh - 25rem);
+    background-color: var(--color-bg);
+  }
+
+  &__wrapper {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 11%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 70rem;
+    width: 100%;
+    flex: 1;
+    padding: var(--default-padding);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+  }
+}
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--default-padding);
+}
+.todoAdd {
+  color: #f1f3f5;
+  font-weight: 800;
+  letter-spacing: 5px;
+  font-size: 3rem;
+}
+
+.DarkThemeToggle {
+  @include linkStyle;
+  display: flex;
+  align-items: center;
+
+  .App--isDark & {
+    @include activeLink;
+
+    &__lightMode {
+      display: none;
+    }
+    &__DarkMode {
+      display: inline-block;
+    }
+  }
+  &__DarkMode {
+    display: none;
+  }
+
+  &--isActive {
+    @include activeLink;
+  }
+}
+
+.TaskSearchBar {
+  display: flex;
+  flex-direction: column;
+
+  &__searchContent {
+    display: flex;
+    box-shadow: 0 0.6rem 0.8rem rgba(85, 102, 119, 0.03),
+      0 0.1rem 0.1rem rgba(85, 102, 119, 0.4);
+    height: 6.4rem;
+    cursor: text;
+    border-radius: 0.3rem;
+    overflow: hidden;
+  }
+
+  &__input {
+    padding: var(--default-padding);
+    background-color: var(--color-input);
+    border: 0;
+    flex: 1 1 auto;
+    color: var(--color-text);
+    min-width: 4.8rem;
+    font-family: var(--font-family-ar);
+    font-size: var(--font-size-large);
+    transition: background-color var(--timing-animation);
+  }
+  ::placeholder {
+    color: var(--color-gray);
+    opacity: 1;
+  }
+
+  &__button {
+    background-color: var(--color-input);
+    border: 0;
+    transition: background-color var(--timing-animation);
+  }
+}
+
+.show {
+  display: none;
+}
+
+.TaskList {
+  box-shadow: 0px 14px 25px 0px rgba(0, 0, 0, 0.1);
+  &__link {
+    @include linkStyle;
+    // margin-top: var(--default-padding);
+
+    &--isActive {
+      @include activeLink;
+
+      .show {
+        display: inline-block;
+      }
+      .hide {
+        display: none;
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    // margin-top: calc(var(--default-padding) * 2);
+    flex: 1;
+    // background-color: var(--color-light-gray);
+  }
+
+  &__taskContent {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0 calc(var(--default-padding) / 2);
+    height: 5.4rem;
+    border-bottom: 0.1px solid var(--color-gray);
+    background-color: var(--color-input);
+
+    &:hover {
+      //background-color: #ececec;
+      background-color: var(--color-task-hover);
+
+      .TaskList__deleteIcon {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    &--isActive {
+      text-decoration: line-through;
+      color: var(--color-gray);
+
+      .TaskList__list--hideCompleted & {
+        display: none;
+      }
+
+      .TaskList__checkbox {
+        background-color: var(--color-blue);
+      }
+
+      .TaskList__checkboxImage {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  &__valueContent {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    font-size: var(--font-size-large);
+  }
+
+  &__value {
+    flex: 1;
+    cursor: pointer;
+    height: 100%;
+    padding: var(--default-padding);
+    padding-right: calc(var(--default-padding) / 2);
+    transition: all var(--timing-animation);
+  }
+
+  &__valueInput {
+    padding: var(--default-padding);
+    padding-right: calc(var(--default-padding) / 2);
+    font-family: var(--font-family-ar);
+    font-size: var(--font-size-large);
+    border: none;
+    width: 100%;
+    background-color: var(--color-white);
+    height: 100%;
+  }
+
+  &__checkbox {
+    width: 2.2rem;
+    height: 2.2rem;
+    background-color: white;
+    box-shadow: 0 0 0.3rem rgba(black, 0.1);
+    border-radius: 50%;
+    border: 1px solid var(--color-light-gray);
+    padding: 0.2rem;
+    // margin-left: calc(var(--default-padding) / 2);
+    cursor: pointer;
+    transition: all var(--timing-animation);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__checkboxImage {
+    opacity: 0;
+    visibility: hidden;
+    user-select: none;
+  }
+
+  &__deleteIcon {
+    position: absolute;
+    width: 2.5srem;
+    right: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--timing-animation);
+    cursor: pointer;
+  }
+}
+.Nav__container {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--default-padding);
+  height: 5.4rem;
+  background-color: var(--color-input);
+  color: hsl(236, 9%, 61%);
+  font-size: small;
+
+  .TaskList__nav--leftItem {
+    width: 15rem;
+  }
+
+  .TaskList__nav {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    &--links {
+      width: auto;
+
+      .TaskList__nav--link {
+        font-size: var(--font-size-small);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-gray);
+        cursor: pointer;
+        transition: all var(--timing-animation);
+        border: 0;
+        font-family: inherit;
+        background: transparent;
+        width: 100%;
+      }
+      .TaskList__nav--selected {
+        color: var(--color-link);
+      }
+    }
+  }
+}
+
+.EmptyList {
+  text-align: center;
+  color: var(--color-gray);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-large);
+  margin: var(--default-padding) auto 0;
+
+  &__img {
+    height: 30rem;
+    filter: grayscale(1);
+    opacity: 0.5;
+  }
+}
+
+.NoCompletedTasks {
+  padding: 3rem;
+  text-align: center;
+}
+
+@media (max-width: 550px) {
+  .Nav__container {
+    position: relative;
+  }
+  .TaskList__nav {
+    position: absolute;
+    left: 50%;
+    bottom: -7rem;
+    transform: translate(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    background-color: var(--color-input);
+    width: 100%;
+    padding: 1.5rem;
+    box-shadow: 0px 14px 25px 0px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    align-items: center;
+  }
+  .TaskList__link {
+    font-size: small;
+  }
+}

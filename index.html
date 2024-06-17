@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="style.scss" />
+    <title>My Todo app</title>
+  </head>
+  <body>
+    <main class="App">
+      <div class="App__upperBackground"></div>
+      <div class="App__lowerBackground"></div>
+
+      <div class="App__wrapper">
+        <header class="Header">
+          <p class="todoAdd">T O D O</p>
+          <button class="DarkThemeToggle">
+            <img
+              class="DarkThemeToggle__lightMode"
+              src="images/icon-moon.svg"
+              alt="light-icon"
+            />
+            <img
+              class="DarkThemeToggle__DarkMode"
+              src="images/icon-sun.svg"
+              alt="light-icon"
+            />
+          </button>
+        </header>
+        <div class="TaskSearchBar">
+          <label for="search-input" class="TaskSearchBar__label"> </label>
+          <form class="TaskSearchBar__searchContent">
+            <input
+              id="search-input"
+              class="TaskSearchBar__input"
+              type="text"
+              placeholder="Create a new todo.."
+              required
+            />
+            <button class="TaskSearchBar__button"></button>
+          </form>
+        </div>
+
+        <div class="TaskList">
+          <button class="TaskList__link"></button>
+          <ul class="TaskList__list"></ul>
+
+          <div class="Nav__container">
+            <p class="TaskList__nav--leftItem">5 items left</p>
+
+            <ul class="TaskList__nav">
+              <li class="TaskList__nav--links">
+                <button
+                  class="TaskList__nav--link TaskList__link--all TaskList__nav--selected"
+                >
+                  All
+                </button>
+              </li>
+              <li class="TaskList__nav--links">
+                <button class="TaskList__nav--link TaskList__link--active">
+                  Active
+                </button>
+              </li>
+              <li class="TaskList__nav--links">
+                <button class="TaskList__nav--link TaskList__link--completed">
+                  Completed
+                </button>
+              </li>
+            </ul>
+            <button class="TaskList__link">Clear Completed</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="script.js" type="module"></script>
+  </body>
+</html>

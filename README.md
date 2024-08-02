@@ -23,8 +23,10 @@ Flexbox  techniques were employed for efficient and flexible positioning of elem
 
 Key Features:
 
-# Responsive Design: Designed and implemented a fully responsive layout using React and Tailwind CSS, ensuring optimal viewing experience across all device sizes.
-# Interactive Elements: Included hover states for all interactive elements, enhancing user experience and providing visual feedback.
+# Responsive Design: 
+   Designed and implemented a fully responsive layout using React and Tailwind CSS, ensuring optimal viewing experience across all device sizes.
+# Interactive Elements: 
+   Included hover states for all interactive elements, enhancing user experience and providing visual feedback.
 # Task Management:
    Add New Tasks: Enabled users to add new to-do items to their list seamlessly.
    Mark as Complete: Allowed users to mark tasks as completed, visually distinguishing them from active tasks.
